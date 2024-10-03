@@ -220,12 +220,12 @@ weight_decay = 0.002
 | Parameters          | GPU                                                    |
 | ------------------- | ------------------------------------------------------ |
 | Model Version       | Uni-CTR                                                |
-| Resource            | GPU 8$\times$NVIDIA V100 32G                           |
+| Resource            | GPU 8×NVIDIA V100 32G                                  |
 | Uploaded Date       | 12/09/2023 (month/day/year)                            |
 | Pytorch Version     | 2.0.1                                                  |
 | Dataset             | [1]                                                    |
 | Domains             | [0,2,3]                                                |
-| Training Parameters | epoch=10, batch_size=3$\times$len(device_ids), lr=1e-4 |
+| Training Parameters | epoch=10, batch_size=3×len(device_ids), lr=1e-4        |
 | Optimizer           | AdamW                                                  |
 | Loss Function       | Sigmoid Cross Entropy With Logits                      |
 | outputs             | AUC                                                    |
@@ -237,14 +237,14 @@ weight_decay = 0.002
 | Parameters      | GPU                           |
 | --------------- | ----------------------------- |
 | Model Version   | Uni-CTR                       |
-| Resource        | GPU 8$\times$NVIDIA V100 32G |
+| Resource        | GPU 8×NVIDIA V100 32G 	  |
 | Uploaded Date   | 12/09/2023 (month/day/year)   |
 | Pytorch Version | 2.0.1                         |
 | Dataset         | [1]                           |
 | Domains         | [0,2,3]                       |
-| batch_size      | 150$\times$len(device_ids)                           |
+| batch_size      | 150×len(device_ids)           |
 | outputs         | AUC                           |
-| AUC             | [0.7523, 0.7569, 0.7246]       |
+| AUC             | [0.7523, 0.7569, 0.7246]      |
 
 
 # [Description of Random Situation](#contents)
