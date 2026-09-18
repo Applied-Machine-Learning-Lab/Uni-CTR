@@ -1,0 +1,53 @@
+name: Sync from Uni-CTR
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 每天凌晨2点（UTC）
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  sync_repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: 检出目标仓库
+      - name: Checkout Destination Repo
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      # Step 2: 备份 .github 目录
+      - name: Backup .github directory
+        run: |
+          mkdir -p /tmp/github_backup
+          cp -r .github /tmp/github_backup
+
+      # Step 3: 添加源仓库为远程仓库
+      - name: Add Source Repo as Remote
+        run: |
+          git remote add source https://github.com/archersama/Uni-CTR.git
+          git fetch source
+
+      # Step 4: 同步源仓库内容到目标仓库
+      - name: Sync from Source to Destination
+        run: |
+          git reset --hard source/main  # 将目标仓库重置为源仓库的 main 分支内容
+
+      # Step 5: 恢复 .github 目录
+      - name: Restore .github directory
+        run: |
+          cp -r /tmp/github_backup/.github .
+
+      # Step 6: 配置 git 用户信息
+      - name: Set Git User Identity
+        run: |
+          git config --local user.name "FzKuji"
+          git config --local user.email "fzkuji@gmail.com"
+
+      # Step 7: 强制推送到目标仓库
+      - name: Push to Destination
+        run: |
+          git add .github
+          git commit -m "Restore .github after sync"
+          git push origin main --force
